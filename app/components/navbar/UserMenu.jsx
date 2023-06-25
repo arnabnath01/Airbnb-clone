@@ -14,7 +14,7 @@ const UserMenu = () => {
 
   return (
     <div className="flex flex-row">
-      <div className="max-md:hidden py-[32px] px-3 ">Airbnb your home</div>
+      <div className="max-md:hidden py-[33px] px-3 ">Airbnb your home</div>
       {/* <div className='py-[34px] px-2 hover:shadow-md rounded-full'>
         <BsGlobe />
         </div> */}
@@ -37,13 +37,16 @@ const UserMenu = () => {
           className="absolute
           rounded-xl
           shadow-md
-          w-[40vw]
-          md:w-3/4
+          w-[20vw]
+          max-sm:w-3/4
           bg-white 
-          top-12
-           right-0
+          overflow-hidden
+          top-[110px]
+           right-8
           text-sm
-          z-10"
+          transition-transform
+          z-10
+          "
         >
           <div
             className="flex

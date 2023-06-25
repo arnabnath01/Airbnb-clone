@@ -2,7 +2,7 @@
 import {BiSearch} from 'react-icons/bi'
 const Search = () => {
   return (
-    <div className=' shadow-sm hover:shadow-md rounded-full py-2 transition'>
+    <div className=' shadow-sm hover:shadow-md rounded-full py-2 max-sm:hidden transition'>
       <div className="cursor-pointer
       flex flex-row
       items-center w-full p-2 rounded bg-gray-10
