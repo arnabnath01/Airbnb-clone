@@ -44,7 +44,7 @@ const UserMenu = () => {
           top-[110px]
            right-8
           text-sm
-          transition-transform
+          transition
           z-10
           "
         >
