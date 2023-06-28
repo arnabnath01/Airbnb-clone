@@ -3,6 +3,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { AiOutlineClose } from 'react-icons/ai'
 import Button from "../Button";
+
+
+
 interface ModalProps {
     isOpen?: boolean;
     onClose: () => void;
@@ -69,7 +72,7 @@ const Modals: React.FC<ModalProps> = ({
     }, [secondaryAction, disabled])
 
 
-
+if(!isOpen) return null;
 
 
     return (
@@ -107,7 +110,6 @@ const Modals: React.FC<ModalProps> = ({
                         h-full
                         ${showModal ? `translate-y-0 opacity-100` : `translate-y-full opacity-0`}
                        
-                        
                         `}
                     >
                         <div className="
@@ -125,9 +127,10 @@ const Modals: React.FC<ModalProps> = ({
                 bg-white
                 outline-none
                 focus:outline-none
+                
                 " >
 
-                    {/* HEADER */}
+                            {/* HEADER */}
                             <div className="
                     flex
                     items-center
@@ -139,12 +142,12 @@ const Modals: React.FC<ModalProps> = ({
 
                     ">
                                 <button
-                        onClick={handleClose}
-                        className="
+                                    onClick={handleClose}
+                                    className="
                         p-1
                         border-0
                         hover:opacity-70
-                        translation
+                        transition
                         absolute
                         left-9
                         ">
@@ -157,20 +160,28 @@ const Modals: React.FC<ModalProps> = ({
                     font-semibold
                     ">{title}
                                 </div>
-                                {/* BODY */}
-                                <div className="
+
+                            </div>
+                            {/* BODY */}
+                            <div className="
                     relative
                     p-6 flex-auto
                     ">{body}
-                                </div>
-                                {/* FOOTER */}
-                                <div
-                                    className="
+                            </div>
+                            {/* FOOTER */}
+                            <div
+                                className="
                     flex flex-col
                     gap-2 p-6
                     ">
+                                <div className="flex flex-row 
+                        items-center 
+                        gap-4
+                        w-full
+                        ">
                                     {secondaryAction && secondaryActionLabel && (
                                         <Button
+                                        outline
                                             disabled={disabled}
                                             label={secondaryActionLabel}
                                             onClick={handleSecondaryAction}
@@ -182,6 +193,7 @@ const Modals: React.FC<ModalProps> = ({
                                         label={actionLabel}
                                         onClick={handleSubmit}
                                     />
+
                                 </div>
 
                             </div>

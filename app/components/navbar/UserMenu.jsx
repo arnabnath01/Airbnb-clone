@@ -4,8 +4,9 @@ import { BsGlobe } from "react-icons/bs";
 import Profile from "./Profile";
 import { useCallback, useState } from "react";
 import MenuItems from "./MenuItems";
-
+import useRegisterModal  from "@/app/hooks/useRegisterModal";
 const UserMenu = () => {
+  const registerModal = useRegisterModal();
   const [open, setOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
@@ -57,7 +58,7 @@ const UserMenu = () => {
           >
             <>
               <MenuItems onclick={() => {}} label="login " />
-              <MenuItems onclick={() => {}} label="sign up " />
+              <MenuItems onclick={registerModal.onOpen} label="sign up " />
             </>
           </div>
         </div>
