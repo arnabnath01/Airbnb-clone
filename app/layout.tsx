@@ -23,11 +23,10 @@ export default function RootLayout({
         <ClientOnly>
           <RegisterModal/>
          
-        <Modals label='hello' />
+      
         <Navbar/> 
         </ClientOnly>
-        
-        
+      
         {children}</body>
     </html>
   )

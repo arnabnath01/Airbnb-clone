@@ -12,6 +12,8 @@ import {
 import useRegisterModal from "@/app/hooks/useRegisterModal"
 import Modals from "./Modals"
 import Heading from "../Heading"
+import Input from "../inputs/Input"
+import { error } from "console"
 
 
 const RegisterModal = () => {
@@ -57,6 +59,13 @@ const {
            <Heading
            title="Welcome to airbnb "
            subtitle="Create your account"
+           />
+           <Input 
+           id="email"
+           label="Email"
+           register={register}
+           errors={errors}
+           required
            />
         </div>
     )
