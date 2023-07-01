@@ -10,7 +10,7 @@ const Profile = () => {
     flex-row items-center
      cursor-pointer
     bg-white hover:shadow-sm 
-     p-3 mr-[27px]
+     mx-3 mr-[27px]
      py-[33px]">
       <div className='pr-3'>
         <AiOutlineMenu/>

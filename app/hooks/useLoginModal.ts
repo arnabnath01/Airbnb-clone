@@ -1,11 +1,11 @@
 import {create } from 'zustand'
 
-interface LogInrModalStore {
+interface LoginModelStore {
     isOpen : boolean;
     onOpen:()=>void;
     onClose:()=>void;
 }
-const  useRegisterModal = create<LogInrModalStore> ((set)=>
+const  useLoginModal = create<LoginModelStore> ((set)=>
     ({
         isOpen:false,
         onOpen:()=> set({isOpen:true}),
@@ -14,4 +14,4 @@ const  useRegisterModal = create<LogInrModalStore> ((set)=>
     })
 );
 
-export default useRegisterModal;
+export default useLoginModal;

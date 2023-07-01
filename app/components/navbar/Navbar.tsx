@@ -4,11 +4,22 @@ import Logo from './Logo'
 import Search from './Search'
 import UserMenu from './UserMenu'
 
-const Navbar = () => {
+import { User } from '@prisma/client'   //imported from prims schema 
+
+
+interface NavbarProps{
+  currrentUser?:User | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({
+  currrentUser
+}) => {
+
+  console.log(currrentUser)
   return (
     <div>
-      <div className='fixed z-10 w-full bg-white shadow-sm'>
-      <div className="py-4 border-b-[1px] ">
+      <div className='fixed z-10 w-full bg-white  shadow-sm'>
+      <div className="py-4 pb-[5px] border-b-[1px] ">
 
       <Container >
         <div className="

@@ -84,7 +84,8 @@ if(!isOpen) return null;
      overflow-hidden
      overflow-y-auto
      fixed
-     inset-0 z-[9] 
+     inset-0 
+     z-10
      outline-none
      focus:outline-none
     bg-neutral-500/70
@@ -114,7 +115,8 @@ if(!isOpen) return null;
                     >
                         <div className="
                 translate 
-                h-full
+                -x-8
+                h-auto
                 lg:h-auto
                 md:h-auto
                 border-0
@@ -123,8 +125,9 @@ if(!isOpen) return null;
                 relative
                 flex
                 flex-col
-                w-full
+                w-auto
                 bg-white
+                
                 outline-none
                 focus:outline-none
                 
@@ -133,10 +136,11 @@ if(!isOpen) return null;
                             {/* HEADER */}
                             <div className="
                     flex
-                    items-center
+                
                     justify-center
-                    p-6
+                    p-3
                     rounded-t
+                
                     relative
                     border-b-[1px]
 
@@ -165,7 +169,7 @@ if(!isOpen) return null;
                             {/* BODY */}
                             <div className="
                     relative
-                    p-6 flex-auto
+                    p-6 
                     ">{body}
                             </div>
                             {/* FOOTER */}
@@ -195,6 +199,7 @@ if(!isOpen) return null;
                                     />
 
                                 </div>
+                                {footer}
 
                             </div>
 
