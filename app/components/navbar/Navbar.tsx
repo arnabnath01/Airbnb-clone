@@ -4,18 +4,19 @@ import Logo from './Logo'
 import Search from './Search'
 import UserMenu from './UserMenu'
 
-import { User } from '@prisma/client'   //imported from prims schema 
+
+import { SafeUser } from '@/app/types'
 
 
 interface NavbarProps{
-  currrentUser?:User | null;
+  currentUser? : SafeUser | null
 }
 
 const Navbar: React.FC<NavbarProps> = ({
-  currrentUser
+  currentUser
 }) => {
 
-  console.log(currrentUser)
+  console.log(currentUser)
   return (
     <div>
       <div className='fixed z-10 w-full bg-white  shadow-sm'>
@@ -32,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({
         ">
           <Logo/>
           <Search/>
-          <UserMenu/>
+          <UserMenu currentUser={currentUser}/>
         </div>
     
       </Container>

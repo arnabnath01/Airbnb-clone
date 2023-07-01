@@ -1,12 +1,14 @@
 // fectching the current user data from server component
 
 import { getServerSession } from "next-auth";
+
+ 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import  Prisma  from "@/app/libs/prismadb";
+import prisma from '@/app/libs/prismadb'
+
 
 export async function getSession(){         // The function takes no arguments and returns a promise that resolves to a session object.
     return await getServerSession(authOptions)          //The return await getServerSession(authOptions) statement returns the promise returned by the getServerSession() function.
-
 
 }
 
@@ -16,20 +18,31 @@ export async function getSession(){         // The function takes no arguments a
 //      through our server components
 
 
-export async function getCurrentUser() {
+export default async function getCurrentUser() {
     try {
         const session = await getSession();
 
-        if(session?.user?.email){
+        if(!session?.user?.email){
             return null;
 
         }
 
         const currentUser = await prisma?.user.findUnique({
             where:{
-                email:session?.user?.email as String
+                email: session?.user?.email as string
             }
-        })
+        });
+
+        if(!currentUser) {
+            return null;
+        }
+
+        return {
+            ...currentUser,
+            createdAt: currentUser.createdAt.toISOString(),
+            updatedAt: currentUser.updatedAt.toISOString(),
+            emailVerified: currentUser.emailVerified?.toISOString() || null
+          }
 
     } catch (error:any) {
         return null;
