@@ -6,6 +6,7 @@ import UserMenu from './UserMenu'
 
 
 import { SafeUser } from '@/app/types'
+import Catagories from './Catagories'
 
 
 interface NavbarProps{
@@ -38,7 +39,11 @@ const Navbar: React.FC<NavbarProps> = ({
     
       </Container>
       </div>
+      <div>
+        <Catagories/>
       </div>
+      </div>
+      
      
     </div>
   )

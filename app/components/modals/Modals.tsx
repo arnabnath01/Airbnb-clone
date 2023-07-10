@@ -14,7 +14,7 @@ interface ModalProps {
     body?: React.ReactElement;
     footer?: React.ReactElement;
     actionLabel: string;
-    disabled: boolean;
+    disabled?: boolean;
     secondaryAction?: () => void;
     secondaryActionLabel?: string;
 
@@ -78,7 +78,8 @@ if(!isOpen) return null;
     return (
         <>
             <div className="
-     justify-center
+     justify-self-center
+     max-md:
      items-center
      flex
      overflow-hidden

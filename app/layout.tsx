@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import ToasterProvider from './provider/ToasterProvider'
 import LogInModal from './components/modals/LogInModal'
 import getcurrentUser from './actions/getCurrentUser'
+import RentalModal from './components/modals/RentModal'
 
 
 
@@ -34,6 +35,7 @@ export default async function RootLayout({
         <ClientOnly>
           <ToasterProvider/>
           <Navbar currentUser={currentUser}/>
+          <RentalModal/>
           <LogInModal/>
           <RegisterModal/>
           

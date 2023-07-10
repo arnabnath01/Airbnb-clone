@@ -4,13 +4,16 @@ import { BsGlobe } from "react-icons/bs";
 import Profile from "./Profile";
 import { useCallback, useState } from "react";
 import MenuItems from "./MenuItems";
-import useRegisterModal  from "@/app/hooks/useRegisterModal";
-import useloginModal  from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useloginModal from "@/app/hooks/useLoginModal";
+import userentalmodal from "@/app/hooks/useRentModal";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
+import { on } from "events";
+// import rentalModal from "../modals/rentalModal";
 
 
-interface UserMenuProps{
+interface UserMenuProps {
   currentUser?: SafeUser | null
 }
 
@@ -18,23 +21,42 @@ const UserMenu: React.FC<UserMenuProps> = ({
   currentUser
 }) => {
 
-
   const registerModal = useRegisterModal();
   const loginModal = useloginModal();
-  const [open, setOpen] = useState(false);
+  const rentModal = userentalmodal();
 
+  const [open, setOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
     setOpen((value) => !value);
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen
+    }
+
+    //else show the rent
+    return rentModal.onOpen
+
+  },
+    [loginModal, currentUser, rentModal])
 
   // const currentuser = await getCurrentUser();
 
 
   return (
     <div className="flex flex-row">
-      <div className="max-md:hidden py-[33px] px-3 ">Airbnb your home</div>
+      <div
+        onClick={onRent}
+        className="
+      font-semibold
+      text-justify
+      pt-4 px-[33px]
+      pb-[10px]
+      transition
+      cursor-pointer
+      max-md:hidden">Airbnb your home</div>
       {/* <div className='py-[34px] px-2 hover:shadow-md rounded-full'>
         <BsGlobe />
         </div> */}
@@ -48,7 +70,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         transition
         "
       >
-        <Profile />
+        <Profile src={currentUser?.image} />
       </div>
 
       {/* <UserMenuDropdown /> */}
@@ -78,28 +100,28 @@ const UserMenu: React.FC<UserMenuProps> = ({
           >
 
             {
-              currentUser ? 
-              (<>
-               <MenuItems onclick={()=>{}} label="My trips " />
-               <MenuItems onclick={()=>{}} label="My favourites " />
-               <MenuItems onclick={()=>{}} label="My properties " />
-               <MenuItems onclick={()=>{}} label="Airbnb my home" />
-               <MenuItems onclick={()=>{}} label="My reservations " />
-              <hr />
-              <hr />
-              <hr />
-               <MenuItems onclick={()=>signOut()} label="log out " />
-              </>
-              )
-              
-               : (
-                <>
-                <MenuItems onclick={loginModal.onOpen} label="log in " />
-                <MenuItems onclick={registerModal.onOpen} label="sign up " />
-              </>
-              )
+              currentUser ?
+                (<>
+                  <MenuItems onclick={() => { }} label="My trips " />
+                  <MenuItems onclick={() => { }} label="My favourites " />
+                  <MenuItems onclick={() => { }} label="My properties " />
+                  <MenuItems onclick={rentModal.onOpen} label="Airbnb my home" />
+                  <MenuItems onclick={() => { }} label="My reservations " />
+                  <hr />
+                  <hr />
+                  <hr />
+                  <MenuItems onclick={() => signOut()} label="log out " />
+                </>
+                )
+
+                : (
+                  <>
+                    <MenuItems onclick={loginModal.onOpen} label="log in " />
+                    <MenuItems onclick={registerModal.onOpen} label="sign up " />
+                  </>
+                )
             }
-            
+
           </div>
         </div>
       )}

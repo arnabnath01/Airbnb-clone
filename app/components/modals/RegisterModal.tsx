@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react"
+import { useState,useCallback } from "react"
 import  {AiFillGithub} from 'react-icons/ai'
 import  {FcGoogle} from 'react-icons/fc'
 import axios from 'axios'
@@ -10,6 +10,7 @@ import {
 } from 'react-hook-form'
 
 import useRegisterModal from "@/app/hooks/useRegisterModal"
+import useLogInModal from "@/app/hooks/useLoginModal"
 import Modals from "./Modals"
 import Heading from "../Heading"
 import Input from "../inputs/Input"
@@ -17,17 +18,22 @@ import { error } from "console"
 import { toast } from "react-hot-toast"
 import Button from "../Button"
 import { BsFacebook } from "react-icons/bs"
+import { signIn } from "next-auth/react"
 
 
 const RegisterModal = () => {
 
 const registerModal = useRegisterModal();
+const logInModal = useLogInModal();
 const [isLoading, setIsLoading] = useState(false)
 
 const {
     register,
     handleSubmit,
     formState: { errors },
+
+    
+    
 
 }=useForm<FieldValues>({
     defaultValues: {
@@ -44,6 +50,7 @@ const {
         axios.post('/api/register',data)
     .then(()=>{
         registerModal.onClose();
+        toast.success('Successfully created user!')
     })
     .catch((error)=>{
         toast.error('Something went wrong');
@@ -53,6 +60,13 @@ const {
         setIsLoading(false);
     })
     }
+
+    const toggle = useCallback(()=>{
+        registerModal.onClose;
+        logInModal.onOpen;
+        
+    },
+    [logInModal,registerModal])
   
     
     const bodyContent = (
@@ -99,7 +113,7 @@ const {
                outline
                label="Continue with Google"
                icon={FcGoogle}
-               onClick={()=>{}}
+               onClick={()=>signIn('google')}
                
                /> 
                <Button
@@ -107,15 +121,9 @@ const {
                outline
                label="Continue with Github"
                icon={AiFillGithub}
-               onClick={()=>{}}
+               onClick={()=>signIn('github')}
                /> 
-               <Button
                
-               outline
-               label="Continue with Facebook"
-               icon={BsFacebook}
-               onClick={()=>{}}
-               /> 
 
                <div className="flex flex-row
                justify-center
@@ -128,7 +136,7 @@ const {
             </div>
 
             <div
-            onClick={registerModal.onClose}
+            onClick={toggle}
             className="text-grey-500
             cursor-pointer
             hover:underline

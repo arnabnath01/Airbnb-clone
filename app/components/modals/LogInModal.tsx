@@ -18,7 +18,6 @@ import Input from "../inputs/Input"
 
 import { toast } from "react-hot-toast"
 import Button from "../Button"
-import { BsFacebook } from "react-icons/bs"
 import {  useRouter } from "next/navigation"
 
 
@@ -28,6 +27,14 @@ const registerModal = useRegisterModal(); //we need this to switch the modals
 const logInModal = useLogInModal();
 const router =useRouter();
 const [isLoading, setIsLoading] = useState(false)
+
+const toggle = useCallback(()=>{
+    logInModal.onClose;
+    registerModal.onOpen;
+    
+},
+[logInModal,registerModal])
+
 
 const {
     register,
@@ -105,7 +112,7 @@ const {
                label="Continue with Google"
                
                icon={FcGoogle}
-               onClick={()=>{}}
+               onClick={()=>signIn('google')}
                
                /> 
                <Button
@@ -113,15 +120,9 @@ const {
                outline
                label="Continue with Github"
                icon={AiFillGithub}
-               onClick={()=>{}}
+               onClick={()=>signIn('github')}
                /> 
-               <Button
-               
-               outline
-               label="Continue with Facebook"
-               icon={BsFacebook}
-               onClick={()=>{}}
-               /> 
+                
 
                <div className="flex flex-row
                justify-center
@@ -130,16 +131,16 @@ const {
                 ">
             <div className="text-semibold
             text-black
-            ">Do not have account ?
+            ">First time using airbnb ?
             </div>
 
             <div
-            onClick={ registerModal.onOpen}
+            onClick={toggle}
             className="text-grey-500
             cursor-pointer
             hover:underline
 
-            ">Sign Up</div>
+            ">Create an account</div>
 
                </div>
             </div>
