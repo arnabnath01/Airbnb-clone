@@ -9,7 +9,7 @@ import useloginModal from "@/app/hooks/useLoginModal";
 import userentalmodal from "@/app/hooks/useRentModal";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
-import { on } from "events";
+
 // import rentalModal from "../modals/rentalModal";
 
 
