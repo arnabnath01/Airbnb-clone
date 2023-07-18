@@ -7,6 +7,9 @@ import Heading from "../Heading"
 import { catagories } from "../navbar/Catagories"
 import Catagoryinput from "../inputs/Catagoryinput"
 import { FieldValues, useForm } from "react-hook-form"
+import CountrySelect from "../inputs/CountrySelect"
+import Map from "../Map"  //to work the map SSR, this static import will not work, we have to dynamically import it
+import dynamic from "next/dynamic"
 
 enum STEPS {
   CATAGORY = 0,
@@ -52,6 +55,12 @@ const {
 });
 
 const catagory = watch('catagory');
+const location = watch('location');
+
+const Map = useMemo(()=>dynamic(()=>import('../Map'),{          //dynamically imports the map
+  ssr:false         // this disables the server side rendering (SSR)
+}),[location])    //? th Map does depend upon the location
+
 
 // creating a custom set value, because default setvalue sets the value, but does not re render the page.
 
@@ -137,8 +146,19 @@ const setCustomValues = (id: string, value: any) => {
 
   if(step===STEPS.LOCATION){
     bodyContent=(
-      <div>
-        Location Step!
+      <div className="
+      flex flex-col gap-4">
+      <Heading
+      title="Where is your palce located ?"
+      subtitle="Help guests to find you!"
+      />
+      <CountrySelect
+      value={location}
+       onChange={(value)=> setCustomValues('location',value)}
+      />
+      <Map
+      center={location?.latlng}
+      />
       </div>
     )
   }
