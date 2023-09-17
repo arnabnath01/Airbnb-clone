@@ -49,6 +49,8 @@ const UserMenu: React.FC<UserMenuProps> = ({
     <div className="flex flex-row">
       <div
         onClick={onRent}
+
+        // onClick={rentModal.onOpen}
         className="
       font-semibold
       text-justify

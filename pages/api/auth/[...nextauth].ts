@@ -7,8 +7,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
 import prisma from "@/app/libs/prismadb"
 
-export const authOptions: AuthOptions = {      //The adapter property is set to use the    PrismaAdapter, which is responsible for connecting NextAuth to Prisma, a modern database toolkit.
-
+export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
@@ -19,6 +18,9 @@ export const authOptions: AuthOptions = {      //The adapter property is set to 
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
     }),
+
+
+   
     CredentialsProvider({
       name: 'credentials',
       credentials: {
@@ -27,29 +29,29 @@ export const authOptions: AuthOptions = {      //The adapter property is set to 
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid credentials');
+          return Promise.reject(new Error('Invalid credentials'));
         }
-
+      
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email
           }
         });
-
+      
         if (!user || !user?.hashedPassword) {
-          throw new Error('Invalid credentials');
+          return Promise.reject(new Error('Invalid credentials, please try again'));
         }
-
+      
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.hashedPassword
         );
-
+      
         if (!isCorrectPassword) {
-          throw new Error('Invalid credentials');
+          return Promise.reject(new Error('Incorrect password'));
         }
-
-        return user;
+      
+        return Promise.resolve(user);
       }
     })
   ],

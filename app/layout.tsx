@@ -2,17 +2,14 @@ import ClientOnly from './components/ClientOnly'
 import RegisterModal from './components/modals/RegisterModal'
 import Navbar from './components/navbar/Navbar'
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Nunito } from 'next/font/google'
 import ToasterProvider from './provider/ToasterProvider'
 import LogInModal from './components/modals/LogInModal'
 import getcurrentUser from './actions/getCurrentUser'
 import RentalModal from './components/modals/RentModal'
 
 
-
-
-
-const inter = Inter({ subsets: ['latin'] })
+const font = Nunito({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'AIRBNB CLONE',
@@ -31,17 +28,18 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.className}>
         <ClientOnly>
           <ToasterProvider/>
-          <Navbar currentUser={currentUser}/>
           <RentalModal/>
           <LogInModal/>
           <RegisterModal/>
-          
+          <Navbar currentUser={currentUser}/>
         </ClientOnly>
-      
-        {children}</body>
+        <div className='pb-20 pt-28'>
+        {children}
+          </div>
+        </body>
     </html>
   )
 }

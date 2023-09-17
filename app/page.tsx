@@ -1,9 +1,26 @@
-import Image from 'next/image'
-
+import ClientOnly from './components/ClientOnly'
+// import { Container } from 'postcss'
+import EmptyState from './components/EmptyState';
+import Container from '../app/components/Container';
 export default function Home() {
+
+  const isEmpty = true;
+
+  if(isEmpty){
+    return (
+      <ClientOnly>
+        <EmptyState showReset
+        />
+      </ClientOnly>
+    )
+  }
   return (
-    <div className='p-10'>
-    
-    </div>
-  )
+    <ClientOnly>
+      <Container>
+        <div className='p-10 mt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
+          <div>My future listings</div>
+        </div>
+      </Container>
+    </ClientOnly>
+  );
 }
