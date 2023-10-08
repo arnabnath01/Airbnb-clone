@@ -135,7 +135,7 @@ const onSubmit: SubmitHandler<FieldValues> = (data) => {
 
 const [isLoading,setIsLoading] = useState(false);
 
-  //CATAGORY STEP
+  //CATAGORY STEP  1st step
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.CATAGORY) { return undefined };
     return 'Back'
@@ -187,7 +187,7 @@ const [isLoading,setIsLoading] = useState(false);
   )
 
 
-  // LOCATION STEP
+  // LOCATION STEP 2nd step 
   if (step === STEPS.LOCATION) {
     bodyContent = (
       <div className="

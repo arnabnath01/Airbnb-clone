@@ -72,7 +72,7 @@ const Modals: React.FC<ModalProps> = ({
     }, [secondaryAction, disabled])
 
 
-if(!isOpen) return null;
+    if (!isOpen) return null;
 
 
     return (
@@ -86,7 +86,7 @@ if(!isOpen) return null;
      overflow-y-auto
      fixed
      inset-0 
-     z-10
+     z-20
      outline-none
      focus:outline-none
     bg-neutral-500/70
@@ -186,7 +186,7 @@ if(!isOpen) return null;
                         ">
                                     {secondaryAction && secondaryActionLabel && (
                                         <Button
-                                        outline
+                                            outline
                                             disabled={disabled}
                                             label={secondaryActionLabel}
                                             onClick={handleSecondaryAction}
