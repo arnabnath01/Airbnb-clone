@@ -9,9 +9,14 @@ try {
             createdAt:'desc'
         }
     })
-    return listings;    //import the stored const  
+
+    const SafeListings=listings.map((listing)=>({
+        ...listing,
+        createdAt:listing.createdAt.toISOString(),
+    }))
+    return SafeListings;    //import the stored const  
 } catch (error:any) {
-    throw new Error(error)
+    throw new Error(error) 
 }
 
 }
